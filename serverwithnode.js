@@ -8,20 +8,20 @@ const server = http.createServer((req, res)=>{
             res.statuscode = 200;
             path += 'index.html';
             break;
+            
         case '/about':
             res.statuscode = 200;
-
             path += 'about.html';
             break;
        
         case '/about-us':
             res.statuscode = 301;
             res.setHeader("location", "/about");
+            res.end();
             break;
        
         case '/contact':
             res.statuscode = 200;
-
             path += 'contact.html';
             break;
     
