@@ -4,7 +4,7 @@
 const fs = require('fs');
 //Create (if file does not exist, WriteFile will create it)
 
-if (!fs.existsSync("./myfiles/hello.txt")) {
+if (!(fs.existsSync("./myfiles/hello.txt"))) {
     fs.writeFile("./myfiles/hello.txt", "hello summoner, how was you day?",() => {
        
         console.log("Create file Success");
@@ -19,6 +19,20 @@ if (fs.existsSync("./myfiles/hello.txt")) {
             console.log(err);
         } else {
             console.log(data);
+        }
+    });
+}
+else{
+    console.log("File does not exist");
+}
+
+
+if (fs.existsSync("./myfiles/hello.txt")) {
+    fs.appendFile("./myfiles/hello.txt", " My day was awesome!", (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Append Successful");
         }
     });
 }

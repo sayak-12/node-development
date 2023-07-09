@@ -9,4 +9,5 @@ const peopledata = {
     8: "Stephen Strange",
     9: "Mario",
 }
-module.exports = peopledata;
+var a= 100;
+module.exports = {peopledata, a};

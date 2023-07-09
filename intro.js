@@ -1,4 +1,4 @@
-//global object in node.js
+// global object in node.js
 // console.log(global);
 
 // setTimeout(()=>{
@@ -14,6 +14,6 @@
 // console.log(__dirname);
 // console.log(__filename);
 
-const peopledata = require('./database');
-console.log(peopledata);
-console.log(peopledata[4]);
+
+// const peopledata = require('./database');
+// console.log(peopledata.a);
