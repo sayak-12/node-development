@@ -4,13 +4,27 @@
 const fs = require('fs');
 //Create (if file does not exist, WriteFile will create it)
 
-if (!(fs.existsSync("./myfiles/hello.txt"))) {
-    fs.writeFile("./myfiles/hello.txt", "hello summoner, how was you day?",() => {
+// if (!(fs.existsSync("./myfiles/hello.txt"))) {
+//     fs.writeFile("./myfiles/hello.txt", "hello summoner, how was you day?",() => {
+       
+//         console.log("Create file Success");
+//     });
+// }
+if (!fs.existsSync("./myfiles/hello.txt")) {
+    fs.writeFile("./myfiles/hello.txt", "hello student, how was you day?",() => {
        
         console.log("Create file Success");
     });
 }
-
+else{
+    console.log("file already exists, Deleting the file...");
+    fs.unlink("./myfiles/hello.txt",(err)=>{
+        if (err) {
+            console.log(err);
+        }
+        console.log("File Deleted");
+    });
+}
 // Read (if file does not exist, ReadFile will log it)
 
 if (fs.existsSync("./myfiles/hello.txt")) {
@@ -33,38 +47,6 @@ if (fs.existsSync("./myfiles/hello.txt")) {
             console.log(err);
         } else {
             console.log("Append Successful");
-        }
-    });
-}
-else{
-    console.log("File does not exist");
-}
-
-
-if (!fs.existsSync("./myfiles/hello.txt")) {
-    fs.writeFile("./myfiles/hello.txt", "hello student, how was you day?",() => {
-       
-        console.log("Create file Success");
-    });
-}
-else{
-    console.log("file already exists, Deleting the file...");
-    fs.unlink("./myfiles/hello.txt",(err)=>{
-        if (err) {
-            console.log(err);
-        }
-        console.log("File Deleted");
-    });
-}
-
-// Read (if file does not exist, ReadFile will log it)
-
-if (fs.existsSync("./myfiles/hello.txt")) {
-    fs.readFile("./myfiles/hello.txt", "utf8", (err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(data);
         }
     });
 }
