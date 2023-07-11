@@ -5,23 +5,23 @@ const server = http.createServer((req, res)=>{
     var path = "./views/";
     switch (req.url) {
         case '/':
-            res.statuscode = 200;
+            res.statusCode = 200;
             path += 'index.html';
             break;
             
         case '/about':
-            res.statuscode = 200;
+            res.statusCode = 200;
             path += 'about.html';
             break;
        
-        // case '/about-us':
-        //     res.statuscode = 301;
-        //     res.setHeader("location", "/about");
-        //     res.end();
-        //     break;
+        case '/about-us':
+            res.statusCode = 301;
+            res.setHeader("location", "/about");
+            res.end();
+            break;
        
         case '/contact':
-            res.statuscode = 200;
+            res.statusCode = 200;
             path += 'contact.html';
             break;
     
@@ -32,7 +32,9 @@ const server = http.createServer((req, res)=>{
     }
 
     fs.readFile(path, (err, data)=>{
-        if(err) throw err;
+        if(err) {
+            console.log(err);
+        };
         res.setHeader("status", 200);
         res.setHeader("Content-Type", "text/html");
         // res.write(data);
