@@ -43,12 +43,10 @@ app.get("/all-blogs", (req, res)=>{
 })
 app.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "./viewejs/index.ejs"));
-  const ti = [
-    {name:"Sayak raha",comment:"Hello, node"},
-    {name:"A. Tiwari",comment:"Hello, web developers"},
-    {name:"V. Kohli",comment:"Amazing App"}
-  ];
-  res.render('index', {ti});
+  Blog.find().then((result)=>{
+    const ti = result;
+    res.render("index", {ti});
+  })
 });
 
 app.get("/about", (req, res) => {
