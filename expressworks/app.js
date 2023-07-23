@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const mongoose = require("mongoose");
 const Blog = require('../models/blog.js')
 const app = express();
@@ -15,6 +14,7 @@ app.listen(3000, () => {
 //register ejs view engine
 app.set("view engine", "ejs");
 app.set("views", "viewejs");
+app.use(express.urlencoded({extended: true}));
 
 
 //middlewares
@@ -27,19 +27,34 @@ app.use(express.static("public"));
 //routes
 
 app.get("/add-review", (req, res)=>{
-    var newblog = new Blog({
-      name: "Sayak Raha",
-      review: "Lemme talk to ya!"
-    });
-    newblog.save()
-    .then(result=>{res.send(result)})
-    .catch(err=>{res.send(err)});
+    res.render("add-review");
+    
+})
+app.post("/add-review", (req, res)=>{
+  const body = req.body;
+  var newblog = new Blog({
+    name: body.name,
+    review: body.review
+  }) ;
+
+  
+  newblog.save()
+  .then(result=>{res.send(result)})
+  .catch(err=>{res.send(err)});
+  
 })
 app.get("/all-blogs", (req, res)=>{
   Blog.find().then((result)=>{
     res.send(result);
   })
   .catch(err=>{res.send(err)});
+})
+app.get("/reviews/:id", (req, res)=>{
+  const id = req.params.id;
+  Blog.findById(id).then(result=>{
+    const ti = result;
+    res.render("details", {ti});
+  })
 })
 app.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "./viewejs/index.ejs"));

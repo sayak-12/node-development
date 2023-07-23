@@ -15,11 +15,13 @@
         <tr>
             <th>Person</th>
             <th>Review</th>
+            <th>Visit button</th>
         </tr>
         <% ti.forEach(rev=>{ %>
             <tr>
                 <td><%= rev.name %></td>
-                <td><%= rev.comment %></td>
+                <td><%= rev.review%></td>
+                <td><a href="/reviews/<%= rev._id  %>">Know more</a></td>
             </tr>
         <% }) %>
     </table>
