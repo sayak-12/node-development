@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Blog = require('./models/blog.js')
 const app = express();
 var dotenv = require('dotenv');
+var route = require('./models/Blogroutes.js');
 
 dotenv.config();
 const db = process.env.DATABASE_KEY;
@@ -28,37 +29,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //routes
-
-app.get("/add-review", (req, res)=>{
-    res.render("add-review");
-    
-})
-app.post("/add-review", (req, res)=>{
-  const body = req.body;
-  var newblog = new Blog({
-    name: body.name,
-    review: body.review
-  }) ;
-
-  
-  newblog.save()
-  .then(result=>{res.send(result)})
-  .catch(err=>{res.send(err)});
-  
-})
-app.get("/all-blogs", (req, res)=>{
-  Blog.find().then((result)=>{
-    res.send(result);
-  })
-  .catch(err=>{res.send(err)});
-})
-app.get("/reviews/:id", (req, res)=>{
-  const id = req.params.id;
-  Blog.findById(id).then(result=>{
-    const ti = result;
-    res.render("details", {ti});
-  })
-})
 app.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "./viewejs/index.ejs"));
   Blog.find().then((result)=>{
@@ -81,6 +51,9 @@ app.get("/contact", (req, res) => {
 app.get("/about-us", (req, res) => {
   res.redirect("/about");
 });
+
+app.use(route);
+
 
 // 404 error
 app.use((req, res) => {
