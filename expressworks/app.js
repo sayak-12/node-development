@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Blog = require('../models/blog.js')
+const Blog = require('./models/blog.js')
 const app = express();
-const db = "mongodb+srv://sayak:sayakraha@apibuild.gxwtxm3.mongodb.net/mydata?retryWrites=true&w=majority";
+var dotenv = require('dotenv');
+
+dotenv.config();
+const db = process.env.DATABASE_KEY;
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(res=>{console.log("Succesfully connected to MongoDB");
 //server listen
