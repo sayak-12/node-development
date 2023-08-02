@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Blog = require('./models/blog.js')
+const Blog = require('./models/blog.js');
+const User = require('./models/user.js');
 const app = express();
 var dotenv = require('dotenv');
 var route = require('./models/Blogroutes.js');
+const userRoute = require('./models/userRoutes.js');
 
 dotenv.config();
 const db = process.env.DATABASE_KEY;
@@ -53,7 +55,7 @@ app.get("/about-us", (req, res) => {
 });
 
 app.use(route);
-
+app.use(userRoute);
 
 // 404 error
 app.use((req, res) => {

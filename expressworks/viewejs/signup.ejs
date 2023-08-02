@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../includes/head.ejs") %>
+        <title>Sign Up Form</title>
+</head>
+
+<body>
+    <h1 class="h1">Create a new Account</h1>
+    <form action="" method="post" class="form">
+        <div class="form-control"><label for="name">Enter your User Name</label>
+            <input type="text" name="name" placeholder="Your username">
+        </div>
+        <div class="form-control"><label for="email">Enter your Email Address</label>
+            <input type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-control"><label for="pass">Enter your Password</label>
+            <input type="password" name="pass" placeholder="Password">
+        </div>
+        <div class="form-control"><label for="cpass">Confirm your Password</label>
+            <input type="password" name="cpass" placeholder="Confirm Password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login Now</button>
+    </form>
+</body>
+
+</html>

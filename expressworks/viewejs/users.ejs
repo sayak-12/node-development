@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../includes/head.ejs") %>
+    <title>Users page</title>
+</head>
+<body>
+    <h2 class="h2">Our Users</h2>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Sl.no.</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email Address</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% userarray.forEach(rev=>{ %>
+                <tr>
+                    <td><%= rev.username %></td>
+                    <td><%= rev.email %></td>
+                    <td> <a href="/users/<%= rev._id  %>">Visit Profile</a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    <h3 style="text-align: center;">Contact us for more opportunities</h3>
+</body>
+</html>
