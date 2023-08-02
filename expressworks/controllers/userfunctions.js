@@ -12,19 +12,14 @@ const user_create_get =(req, res)=>{
     res.render("signup");
     
 }
-const user_create_post = (req, res)=>{
+const user_create_post = async (req, res)=>{
     const body = req.body;
-    var newuser = new User({
-      username: body.name,
-      email: body.email,
-      password: body.pass
-    }) ;
-  
-    
-    newuser.save()
-    .then(result=>{res.send(result)})
-    .catch(err=>{res.send(err)});
-    
+  try {
+    var user = await User.signup(body.name,body.email,body.pass);
+    res.status(200).send(user);
+  } catch (error) {
+    res.send(error);
+  }
   }
 const single_user =(req, res)=>{
     const id = req.params.id;
