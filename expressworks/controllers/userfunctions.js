@@ -41,11 +41,20 @@ const user_login = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+const checkIdParameter = (req, res, next) => {
+  const id = req.params.id;
+  if (!id) {
+    // If :id parameter is missing, redirect to "/all-users"
+    return res.redirect("/all-users");
+  }
+  next();
+};
 const single_user = (req, res) => {
+  
   const id = req.params.id;
   User.findById(id).then((result) => {
-    const ti = result;
-    res.render("details", { ti });
+    const user = result;
+    res.render("dashboard", { user });
   });
 };
 module.exports = {
@@ -54,5 +63,6 @@ module.exports = {
   user_create_post,
   single_user,
   user_login,
-  user_login_get
+  user_login_get,
+  checkIdParameter
 };
