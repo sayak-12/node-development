@@ -8,22 +8,51 @@
 
 <body>
     <h1 class="h1">Create a new Account</h1>
+    <p class="errors" style="color: red;"></p>
     <form action="" method="post" class="form">
         <div class="form-control"><label for="name">Enter your User Name</label>
-            <input type="text" name="name" placeholder="Your username">
+            <input type="text" name="name" placeholder="Your username" id="name">
         </div>
         <div class="form-control"><label for="email">Enter your Email Address</label>
-            <input type="email" name="email" placeholder="Email Address">
+            <input type="email" name="email" placeholder="Email Address" id="email">
         </div>
         <div class="form-control"><label for="pass">Enter your Password</label>
-            <input type="password" name="pass" placeholder="Password">
+            <input type="password" name="pass" placeholder="Password" id="pass">
         </div>
         <div class="form-control"><label for="cpass">Confirm your Password</label>
-            <input type="password" name="cpass" placeholder="Confirm Password">
+            <input type="password" name="cpass" placeholder="Confirm Password" id="cpass">
         </div>
 
         <button type="submit" class="btn btn-primary">Login Now</button>
     </form>
+    <script>
+        var form = document.querySelector('.form');
+        const errortext = document.querySelector('.errors');
+        form.addEventListener('submit', async function (e){
+            e.preventDefault();
+            const email  = document.getElementById('email').value;
+            const name  = document.getElementById('name').value;
+            const password = document.getElementById('pass').value;
+            const cpassword = document.getElementById('cpass').value;
+            // console.log(email,name,password,cpassword);
+            try{
+                const res= await fetch('/signup', {
+                    method: 'POST',
+                    body: JSON.stringify({name, email, password, cpassword}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                const data = await res.json();
+                console.log(data);
+                if (data.error) {
+                    console.log("error");
+                    errortext.innerHTML= data.error;
+                }
+            }
+            catch(err){
+                console.log(err);
+            }
+        })
+    </script>
 </body>
 
 </html>

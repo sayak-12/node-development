@@ -20,10 +20,20 @@ const user_create_get = (req, res) => {
 };
 const user_create_post = async (req, res) => {
   const body = req.body;
+  console.log(body);
   try {
-    var user = await User.signup(body.name, body.email, body.pass, body.cpass);
+    var user = await User.signup(body.name, body.email, body.password, body.cpassword);
     const token = createToken(user._id);
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 5);
+
+    // Set the cookie with the calculated expiration time
+    res.cookie('jwt', token, {
+      expires: expirationDate,
+      httpOnly: true
+    });
     res.status(200).json({ user, token });
+    
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -41,14 +51,7 @@ const user_login = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-const checkIdParameter = (req, res, next) => {
-  const id = req.params.id;
-  if (!id) {
-    // If :id parameter is missing, redirect to "/all-users"
-    return res.redirect("/all-users");
-  }
-  next();
-};
+
 const single_user = (req, res) => {
   
   const id = req.params.id;
@@ -63,6 +66,5 @@ module.exports = {
   user_create_post,
   single_user,
   user_login,
-  user_login_get,
-  checkIdParameter
+  user_login_get
 };

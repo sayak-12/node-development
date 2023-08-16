@@ -21,7 +21,7 @@ app.listen(3000, () => {
 app.set("view engine", "ejs");
 app.set("views", "viewejs");
 app.use(express.urlencoded({extended: true}));
-
+app.use(express.json());
 
 //middlewares
 // app.use((req, res, next)=>{
