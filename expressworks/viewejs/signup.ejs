@@ -47,6 +47,10 @@
                     console.log("error");
                     errortext.innerHTML= data.error;
                 }
+                if (data.user) {
+                    alert("you have successfully logged in");
+                    location.assign("/dashboard");
+                }
             }
             catch(err){
                 console.log(err);

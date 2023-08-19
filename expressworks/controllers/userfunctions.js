@@ -25,14 +25,14 @@ const user_create_post = async (req, res) => {
     var user = await User.signup(body.name, body.email, body.password, body.cpassword);
     const token = createToken(user._id);
     const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 5);
+    expirationDate.setDate(expirationDate.getDate() + 30);
 
     // Set the cookie with the calculated expiration time
     res.cookie('jwt', token, {
       expires: expirationDate,
       httpOnly: true
     });
-    res.status(200).json({ user, token });
+    res.status(200).json({ user });
     
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -41,12 +41,30 @@ const user_create_post = async (req, res) => {
 const user_login_get = async (req, res) => {
   res.render("login");
 };
+const user_logout = async (req, res) => {
+  res.cookie('jwt', "", {
+    expires: new Date(0),
+    httpOnly: true
+  })
+  res.redirect("/login");
+};
+const user_dashboard = async (req, res) => {
+  res.render("dashboard");
+};
 const user_login = async (req, res) => {
   const body = req.body;
   try {
-    var user = await User.login(body.email, body.pass);
+    var user = await User.login(body.email, body.password);
     const token = createToken(user._id);
-    res.status(200).render('dashboard', {user});
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // Set the cookie with the calculated expiration time
+    res.cookie('jwt', token, {
+      expires: expirationDate,
+      httpOnly: true
+    });
+    res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -66,5 +84,7 @@ module.exports = {
   user_create_post,
   single_user,
   user_login,
-  user_login_get
+  user_login_get,
+  user_dashboard,
+  user_logout
 };

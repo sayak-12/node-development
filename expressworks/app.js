@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+var cookieParser = require('cookie-parser')
 const Blog = require('./models/blog.js');
 const User = require('./models/user.js');
 const app = express();
 var dotenv = require('dotenv');
 var route = require('./models/Blogroutes.js');
 const userRoute = require('./models/userRoutes.js');
+const {userdata} = require("./middleware/authmiddleware.js");
 
 dotenv.config();
 const db = process.env.DATABASE_KEY;
@@ -22,6 +24,8 @@ app.set("view engine", "ejs");
 app.set("views", "viewejs");
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cookieParser());
+
 
 //middlewares
 // app.use((req, res, next)=>{
@@ -31,6 +35,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //routes
+app.get("*", userdata);
 app.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "./viewejs/index.ejs"));
   Blog.find().then((result)=>{
