@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../includes/head.ejs") %>
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1 class="h1" style="text-align: center;">Hi user!</h1>
+    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nihil voluptatum qui dicta non numquam repellat quaerat aut repudiandae, tenetur ipsam accusantium animi obcaecati cumque velit eligendi placeat odio maiores dolores aliquid, at ex ullam dignissimos facere. Aspernatur itaque perferendis facilis vitae, molestiae voluptas cum aliquid ipsam facere placeat veritatis ad quis voluptates eum esse voluptatem. Sunt, esse minima assumenda nisi temporibus aliquid quisquam molestias numquam laudantium omnis labore vero. Quo recusandae necessitatibus saepe accusamus fuga aut dolorem voluptatum, voluptates, earum, accusantium ratione sunt illum impedit ipsam nisi. Iure hic natus maxime repellat ex neque aperiam minus nam iusto dolorum.</p>
+    <hr>
+        <ul class="list-group list-group-horizontal">
+            <% if (user) { %>
+            <li class="list-group-item"><%= user.email %></li>
+    
+    <li class="list-group-item"><a name="" id="" class="btn btn-primary submit" href="/logout" role="button">Log out</a></li>
+                <% }else{ %>
+            <li class="list-group-item"><a name="" id="" class="btn btn-primary submit" href="/login" role="button">Log in</a></li>
+            <li class="list-group-item"><a name="" id="" class="btn btn-primary submit" href="/signup" role="button">Sign up</a></li>
+            <% } %>
+          </ul>
+    <h3 style="text-align: center;">Contact us for more opportunities</h3>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../includes/head.ejs") %>
+        <title>Login Form</title>
+</head>
+
+<body>
+    <h1 class="h1">Log in to your Account</h1>
+    <p class="errors" style="color: red;"></p>
+    <form action="" method="post" class="form">
+        <div class="form-control"><label for="email">Enter your Email Address</label>
+            <input type="email" name="email" placeholder="Email Address" id="email">
+        </div>
+        <div class="form-control"><label for="pass">Enter your Password</label>
+            <input type="password" name="pass" placeholder="Password" id="pass">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login Now</button>
+    </form>
+    <script>
+        var form = document.querySelector('.form');
+        
+        const errortext = document.querySelector('.errors');
+        form.addEventListener('submit', async function (e){
+            e.preventDefault();
+            errortext.innerHTML= "";
+            const email  = document.getElementById('email').value;
+            const password = document.getElementById('pass').value;
+            // console.log(email,password);
+            try{
+                const res= await fetch('/login', {
+                    method: 'POST',
+                    body: JSON.stringify({email, password}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                const data = await res.json();
+                console.log(data);
+                if (data.error) {
+                    errortext.innerHTML= data.error;
+                }
+                if (data.user) {
+                    alert("you have successfully logged in");
+                    location.assign("/dashboard");
+                }
+            }
+            catch(err){
+                console.log(err);
+            }
+        })
+    </script>
+</body>
+
+</html>

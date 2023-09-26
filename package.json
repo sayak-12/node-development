@@ -1,5 +1,5 @@
 {
-  "name": "development",
+  "name": "myapp",
   "version": "1.0.0",
   "description": "Nothing much",
   "main": "database.js",
@@ -16,7 +16,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
     "mongodb": "^5.7.0",
-    "mongoose": "^7.3.2",
+    "mongoose": "^7.5.2",
     "validator": "^13.11.0"
   }
 }
