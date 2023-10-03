@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add a Review!</title>
+    <title>Update a Review!</title>
 </head>
 <body>
-    <form action="/add-review" method="post">
+    <form action="/update-reviews/<%= ti._id %>" method="post">
         <div class="name">
             <label for="name">Enter your name</label><br>
-            <input type="text" placeholder="Enter your name here" name="name" required>
+            <input type="text" placeholder="Enter your name here" name="name" required value="<%= ti.name %>">
         </div>
         <div class="review">
             <label for="review">Enter your comment</label><br>
-            <textarea type="text" placeholder="Enter your review here" name="review" required></textarea>
+            <textarea type="text" placeholder="Enter your review here" name="review" required><%= ti.review %></textarea>
         </div>
         <button type="submit">Submit now</button>
     </form>

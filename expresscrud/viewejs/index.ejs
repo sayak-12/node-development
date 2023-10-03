@@ -16,12 +16,16 @@
             <th>Person</th>
             <th>Review</th>
             <th>Visit button</th>
+            <th>update button</th>
+            <th>delete button</th>
         </tr>
         <% ti.forEach(rev=>{ %>
             <tr>
                 <td><%= rev.name %></td>
                 <td><%= rev.review%></td>
                 <td><a href="/reviews/<%= rev._id  %>">Know more</a></td>
+                <td><a href="/update-reviews/<%= rev._id  %>">Update</a></td>
+                <td><a href="/delete-reviews/<%= rev._id  %>">delete</a></td>
             </tr>
         <% }) %>
     </table>
