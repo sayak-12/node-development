@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Blog = require('./models/blog.js');
-const User = require('./models/user.js');
 var dotenv = require('dotenv');
 var route = require('./models/Blogroutes.js');
 const userRoute = require('./models/userRoutes.js');
